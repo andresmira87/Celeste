@@ -78,10 +78,10 @@ main {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 14px;
+  gap: 8px;
   padding: 40px 0;
 }
-.portada { gap: 8px; }
+.portada { gap: 6px; }
 .portada .bajar { margin-top: 2px; }
 
 /* ═══════════ tipografía ═══════════ */

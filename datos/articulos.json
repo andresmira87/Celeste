@@ -1,0 +1,128 @@
+[
+  {
+    "titulo": "Ropita",
+    "icono": "👗",
+    "varios": true,
+    "articulos": [
+      "Bodies manga corta",
+      "Bodies manga larga",
+      "Pijamas",
+      "Conjuntos",
+      "Vestidos",
+      "Medias",
+      "Pantaloncitos",
+      "Gorritos",
+      "Balacas"
+    ]
+  },
+  {
+    "titulo": "Cambio de pañal",
+    "icono": "🧷",
+    "varios": true,
+    "articulos": [
+      "Pañales talla RN",
+      "Pañales talla P",
+      "Pañales talla M",
+      "Pañales talla G",
+      "Pañitos húmedos",
+      "Crema para pañal",
+      "Basurero de pañales",
+      "Dispensador de pañitos",
+      "Bolsas para pañales",
+      "Pañalera color rosado"
+    ]
+  },
+  {
+    "titulo": "Alimentación",
+    "icono": "🍼",
+    "varios": false,
+    "articulos": [
+      "Tetero anticólicos",
+      "Set de biberones de diferentes tamaños",
+      "Esterilizador de biberones",
+      "Calentador de biberones",
+      "Cepillos para lavar biberones",
+      "Dispensador de leche en polvo",
+      "Bolsas para almacenar leche materna",
+      "Extractor de leche portátil/inalámbrico",
+      "Cojín de lactancia",
+      "Baberos de tela",
+      "Pañitos para sacar gases",
+      "Muselinas",
+      "Termo para mantener agua caliente",
+      "Silla comedor multiusos",
+      "Maquina para preparar tetero"
+    ]
+  },
+  {
+    "titulo": "Dormir",
+    "icono": "🌙",
+    "varios": false,
+    "articulos": [
+      "Saco de dormir para bebé",
+      "Swaddles/mantas para envolver",
+      "Monitor de bebé",
+      "Máquina de ruido blanco",
+      "Lámpara nocturna(luz amarilla)",
+      "Organizador para pañales",
+      "Canastos organizadores",
+      "Cambiador",
+      "Colchón/almohadilla para cambiador",
+      "Mecedora para lactancia"
+    ]
+  },
+  {
+    "titulo": "Baño",
+    "icono": "🛁",
+    "varios": false,
+    "articulos": [
+      "Bañera para bebé con base",
+      "Toallas con capucha",
+      "Kit DE Baño Para Bebe",
+      "Kit DE Jabones Y Limpieza",
+      "Cortauñas Electrico",
+      "Bata de baño"
+    ]
+  },
+  {
+    "titulo": "Paseo y viaje",
+    "icono": "🚗",
+    "varios": false,
+    "articulos": [
+      "Coche",
+      "Silla para carro",
+      "Portabebé ergonómico",
+      "Fular"
+    ]
+  },
+  {
+    "titulo": "Juegos",
+    "icono": "🧸",
+    "varios": false,
+    "articulos": [
+      "Gimnasio para bebé",
+      "Silla mesedor",
+      "Tapete de actividades",
+      "Corral para actividades",
+      "Sonajeros",
+      "Mordedores",
+      "Libros de tela",
+      "Libros de alto contraste",
+      "Libros infantiles",
+      "Peluches",
+      "Arco de actividades"
+    ]
+  },
+  {
+    "titulo": "Para mamá",
+    "icono": "💗",
+    "varios": false,
+    "articulos": [
+      "Pijama de lactancia",
+      "Kit de hospital mama: incluye una botella peri o biberón invertido ergonómico de 12.2 oz con ángulo de 75°, ropa interior desechable absorbente, almohadillas relajantes y espuma cicatrizante perineal a base de hamamelis para aliviar la inflamación tras el parto.",
+      "Brasieres de lactancia",
+      "Neceser",
+      "Pañales maternos postparto"
+    ]
+  }
+]

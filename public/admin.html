@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel · Baby Shower Celeste</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --terracota:#c1766a; --rosa:#fbe7e4; --tinta:#7c5a4e; --linea:#f3d9d5; }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0; padding: 24px 16px 60px;
+    font-family: 'Josefin Sans', 'Century Gothic', sans-serif;
+    color: var(--tinta);
+    background: linear-gradient(180deg, #fdf4f2, #fbeae7);
+    min-height: 100vh;
+  }
+  .caja { width: min(100%, 980px); margin: 0 auto; }
+  h1 { font-family: 'Dancing Script', cursive; color: var(--terracota); font-size: 2.6rem; margin: 0 0 4px; text-align: center; }
+  .sub { text-align: center; margin: 0 0 22px; font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; opacity: .8; }
+  .barra { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; }
+  input, button, a.btn, select {
+    font-family: inherit; font-size: .95rem; padding: 11px 18px;
+    border: 1px solid var(--linea); border-radius: 999px; background: #fff; color: var(--tinta);
+    text-decoration: none; cursor: pointer;
+  }
+  button.principal, a.btn {
+    background: linear-gradient(135deg, #e0a196, #c1766a); color: #fff; border: none;
+    letter-spacing: .1em; text-transform: uppercase; font-size: .78rem;
+  }
+  .totales { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; }
+  .totales div { background: #fff; border: 1px solid var(--linea); border-radius: 16px; padding: 12px 20px; text-align: center; min-width: 104px; }
+  .totales b { display: block; font-size: 1.7rem; font-weight: 400; color: var(--terracota); }
+  .totales small { font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+
+  .tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 18px; }
+  .tab { border-radius: 999px; }
+  .tab.activa { background: linear-gradient(135deg, #e0a196, #c1766a); color: #fff; border-color: transparent; }
+
+  .tarjeta { background: #fff; border: 1px solid var(--linea); border-radius: 18px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 8px 20px rgba(200,150,145,.1); }
+  .tarjeta h3 { margin: 0 0 4px; font-size: 1.15rem; font-weight: 600; color: var(--terracota); }
+  .meta { font-size: .78rem; opacity: .75; margin: 0 0 10px; }
+  ul { margin: 0; padding-left: 20px; }
+  li { font-size: .95rem; margin: 2px 0; }
+  .nota { margin: 10px 0 0; padding: 10px 12px; background: var(--rosa); border-radius: 12px; font-size: .88rem; font-style: italic; }
+  .no-viene { border-color: #e3d5d2; opacity: .85; }
+  .no-viene h3 { color: #a08a84; }
+  .vacio { text-align: center; opacity: .7; padding: 40px 0; }
+
+  /* regalos */
+  .grupo { margin-bottom: 22px; }
+  .grupo h2 { font-size: 1.1rem; color: var(--terracota); margin: 0 0 4px; letter-spacing: .06em; }
+  .grupo .tipo { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; opacity: .65; margin: 0 0 10px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--linea); border-radius: 14px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #f7e7e3; font-size: .92rem; vertical-align: middle; }
+  th { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; opacity: .7; font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  tr.libre td { opacity: .6; }
+  .quien { color: var(--terracota); font-weight: 600; }
+  .btn-liberar {
+    padding: 7px 13px; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+    background: #fff; color: #a2453a; border: 1px solid #eebfb9; border-radius: 999px;
+  }
+  .btn-liberar:hover { background: #fbe0dc; }
+  .aviso { text-align: center; padding: 10px; border-radius: 12px; background: #e7f3e9; color: #3d6b45; margin-bottom: 14px; }
+</style>
+</head>
+<body>
+<div class="caja">
+  <h1>Panel del baby shower</h1>
+  <p class="sub">Celeste Mira Rodríguez</p>
+
+  <div class="barra">
+    <input type="password" id="clave" placeholder="Clave" autocomplete="current-password">
+    <button class="principal" id="ver">Entrar</button>
+    <a class="btn" id="csv" href="#" hidden>Descargar Excel (CSV)</a>
+  </div>
+
+  <div id="panel" hidden>
+    <div class="totales" id="totales"></div>
+
+    <div class="tabs">
+      <button class="tab activa" data-vista="asistencia">Confirmaciones</button>
+      <button class="tab" data-vista="regalos">Lista de regalos</button>
+    </div>
+
+    <p class="aviso" id="aviso" hidden></p>
+    <div id="contenido"></div>
+  </div>
+  <div id="lista"></div>
+</div>
+
+<script>
+  const $ = (s) => document.querySelector(s);
+  const clave = $('#clave');
+  let datos = null;
+  let vista = 'asistencia';
+
+  clave.value = new URLSearchParams(location.search).get('clave')
+             || localStorage.getItem('clave-admin') || '';
+  clave.addEventListener('keydown', (e) => { if (e.key === 'Enter') cargar(); });
+  $('#ver').addEventListener('click', cargar);
+  document.querySelectorAll('.tab').forEach((t) => t.addEventListener('click', () => {
+    vista = t.dataset.vista;
+    document.querySelectorAll('.tab').forEach((x) => x.classList.toggle('activa', x === t));
+    pintar();
+  }));
+  if (clave.value) cargar();
+
+  async function cargar() {
+    const k = clave.value.trim();
+    if (!k) return;
+    const r = await fetch('/api/confirmaciones?clave=' + encodeURIComponent(k));
+    const d = await r.json();
+    if (!d.ok) { $('#lista').innerHTML = '<p class="vacio">Clave incorrecta.</p>'; return; }
+    localStorage.setItem('clave-admin', k);
+    datos = d;
+    $('#lista').innerHTML = '';
+    $('#panel').hidden = false;
+    $('#csv').href = '/api/csv?clave=' + encodeURIComponent(k);
+    $('#csv').hidden = false;
+    pintar();
+  }
+
+  function pintar() {
+    const t = datos.resumen;
+    $('#totales').innerHTML = `
+      <div><b>${t.personas}</b><small>personas</small></div>
+      <div><b>${t.adultos}</b><small>adultos</small></div>
+      <div><b>${t.ninos}</b><small>niños</small></div>
+      <div><b>${t.confirmaciones}</b><small>familias</small></div>
+      <div><b>${t.regalos}</b><small>regalos apartados</small></div>
+      <div><b>${t.disponibles}</b><small>aún libres</small></div>`;
+
+    $('#contenido').innerHTML = vista === 'asistencia' ? verAsistencia() : verRegalos();
+  }
+
+  function verAsistencia() {
+    if (!datos.lista.length) return '<p class="vacio">Todavía no hay confirmaciones.</p>';
+    return datos.lista.map((c) => `
+      <div class="tarjeta ${c.asistira ? '' : 'no-viene'}">
+        <h3>${esc(c.nombre)} ${c.asistira ? '' : '· no podrá asistir'}</h3>
+        <p class="meta">${c.telefono ? esc(c.telefono) + ' · ' : ''}${esc(c.creado_en)}${c.asistira ? ' · ' + c.invitados.length + ' persona(s)' : ''}</p>
+        ${c.invitados.length ? '<ul>' + c.invitados.map((i) => `<li>${esc(i.nombre)}${i.tipo === 'nino' ? ' <small>(niño/a)</small>' : ''}</li>`).join('') + '</ul>' : ''}
+        ${c.mensaje ? `<p class="nota">“${esc(c.mensaje)}”</p>` : ''}
+      </div>`).join('');
+  }
+
+  function verRegalos() {
+    return (datos.grupos || []).map((g) => `
+      <div class="grupo">
+        <h2>${g.icono} ${esc(g.titulo)}</h2>
+        <p class="tipo">${g.varios ? 'Lo pueden llevar varias personas' : 'Solo una persona por artículo'}</p>
+        <table>
+          <tr><th>Artículo</th><th>Quién lo lleva</th><th></th></tr>
+          ${g.articulos.map((a) => `
+            <tr class="${a.personas.length ? '' : 'libre'}">
+              <td>${esc(a.nombre)}</td>
+              <td>${a.personas.length
+                    ? a.personas.map((p) => `<span class="quien">${esc(p.nombre)}</span> <small>(${esc(p.creado_en)})</small>`).join('<br>')
+                    : '<small>— libre —</small>'}</td>
+              <td>${a.personas.length
+                    ? a.personas.map((p) => `<button class="btn-liberar" data-reserva="${p.id}" data-nombre="${esc(p.nombre)}" data-articulo="${esc(a.nombre)}">Liberar</button>`).join(' ')
+                    : ''}</td>
+            </tr>`).join('')}
+        </table>
+      </div>`).join('');
+  }
+
+  // liberar un regalo: lo vuelve a dejar disponible y quita a la persona
+  document.addEventListener('click', async (e) => {
+    const b = e.target.closest('.btn-liberar');
+    if (!b) return;
+    if (!confirm(`¿Liberar «${b.dataset.articulo}»?\n\nSe le quita a ${b.dataset.nombre} y queda disponible otra vez.`)) return;
+
+    b.disabled = true;
+    const r = await fetch('/api/liberar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clave: clave.value.trim(), reservaId: +b.dataset.reserva })
+    });
+    const d = await r.json();
+    if (!d.ok) { alert(d.error || 'No se pudo liberar'); b.disabled = false; return; }
+
+    datos.grupos = d.grupos;
+    datos.resumen = d.resumen;
+    pintar();
+    const aviso = $('#aviso');
+    aviso.textContent = `«${b.dataset.articulo}» quedó disponible de nuevo.`;
+    aviso.hidden = false;
+    setTimeout(() => { aviso.hidden = true; }, 4000);
+  });
+
+  function esc(t) {
+    return String(t ?? '').replace(/[&<>"']/g, (m) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+  }
+</script>
+</body>
+</html>

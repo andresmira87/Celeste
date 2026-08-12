@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 212" width="740" height="212">
+<defs>
+  <!-- ── color ── -->
+  <radialGradient id="coral" cx="50%" cy="55%" r="60%">
+    <stop offset="0%"  stop-color="#fdeeec"/>
+    <stop offset="45%" stop-color="#f9c9c2"/>
+    <stop offset="100%" stop-color="#f3aca6"/>
+  </radialGradient>
+  <radialGradient id="rosado" cx="50%" cy="55%" r="60%">
+    <stop offset="0%"  stop-color="#fdf6f5"/>
+    <stop offset="50%" stop-color="#fbdcdc"/>
+    <stop offset="100%" stop-color="#f6c3c7"/>
+  </radialGradient>
+  <radialGradient id="nacar" cx="50%" cy="55%" r="60%">
+    <stop offset="0%"  stop-color="#fffbfa"/>
+    <stop offset="55%" stop-color="#fde7e6"/>
+    <stop offset="100%" stop-color="#f7cfd2"/>
+  </radialGradient>
+  <linearGradient id="salvia" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0%"  stop-color="#93a87c"/>
+    <stop offset="100%" stop-color="#c2cfa6"/>
+  </linearGradient>
+  <linearGradient id="oliva" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0%"  stop-color="#b3b98c"/>
+    <stop offset="100%" stop-color="#d8dcbb"/>
+  </linearGradient>
+
+  <!-- ── acuarela: halo difuminado + bordes suaves ── -->
+  <filter id="halo"  x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation="5"/></filter>
+  <filter id="suave" x="-8%"  y="-8%"  width="116%" height="116%"><feGaussianBlur stdDeviation=".55"/></filter>
+
+  <!-- ── piezas sueltas ── -->
+  <path id="petalo" d="M0-6c-14 0-24-10-24-22 0-13 11-22 24-22s24 9 24 22c0 12-10 22-24 22z"/>
+  <path id="hoja"   d="M0 0c3-15 15-27 31-30-1 17-13 29-31 30z"/>
+  <path id="hojaLarga" d="M0 0c-6-20-4-42 6-60 12 16 14 40 4 60z"/>
+
+  <!-- rosa abierta (radio ~46) -->
+  <g id="rosa">
+    <g fill="url(#coral)" opacity=".95">
+      <use href="#petalo"/>
+      <use href="#petalo" transform="rotate(60)"/>
+      <use href="#petalo" transform="rotate(120)"/>
+      <use href="#petalo" transform="rotate(180)"/>
+      <use href="#petalo" transform="rotate(240)"/>
+      <use href="#petalo" transform="rotate(300)"/>
+    </g>
+    <g fill="url(#coral)" opacity=".9" transform="scale(.62) rotate(30)">
+      <use href="#petalo"/>
+      <use href="#petalo" transform="rotate(72)"/>
+      <use href="#petalo" transform="rotate(144)"/>
+      <use href="#petalo" transform="rotate(216)"/>
+      <use href="#petalo" transform="rotate(288)"/>
+    </g>
+    <g fill="none" stroke="#e8837f" stroke-width="2.2" stroke-linecap="round" opacity=".75">
+      <path d="M-9 2c-3-8 3-14 10-13s10 8 6 14-14 6-18-2"/>
+      <path d="M-14 6c-4-13 5-22 16-21"/>
+    </g>
+    <circle r="4" fill="#f0dcae" opacity=".9"/>
+  </g>
+
+  <!-- peonía clara -->
+  <g id="peonia">
+    <g fill="url(#rosado)" opacity=".95">
+      <use href="#petalo"/>
+      <use href="#petalo" transform="rotate(51)"/>
+      <use href="#petalo" transform="rotate(102)"/>
+      <use href="#petalo" transform="rotate(153)"/>
+      <use href="#petalo" transform="rotate(204)"/>
+      <use href="#petalo" transform="rotate(255)"/>
+      <use href="#petalo" transform="rotate(306)"/>
+    </g>
+    <g fill="url(#nacar)" transform="scale(.55) rotate(25)">
+      <use href="#petalo"/>
+      <use href="#petalo" transform="rotate(72)"/>
+      <use href="#petalo" transform="rotate(144)"/>
+      <use href="#petalo" transform="rotate(216)"/>
+      <use href="#petalo" transform="rotate(288)"/>
+    </g>
+    <circle r="5" fill="#f4d79a"/>
+    <g fill="#e2b45f"><circle cx="6" cy="-4" r="1.6"/><circle cx="-5" cy="4" r="1.6"/><circle cx="2" cy="7" r="1.4"/></g>
+  </g>
+
+  <!-- anémona blanca de centro oscuro -->
+  <g id="anemona">
+    <g fill="url(#nacar)">
+      <use href="#petalo"/>
+      <use href="#petalo" transform="rotate(60)"/>
+      <use href="#petalo" transform="rotate(120)"/>
+      <use href="#petalo" transform="rotate(180)"/>
+      <use href="#petalo" transform="rotate(240)"/>
+      <use href="#petalo" transform="rotate(300)"/>
+    </g>
+    <circle r="9" fill="#c98f7e" opacity=".85"/>
+    <circle r="5" fill="#8f6353"/>
+  </g>
+
+  <!-- botón amarillo -->
+  <g id="boton">
+    <g fill="#f8dc9c">
+      <use href="#petalo" transform="scale(.32)"/>
+      <use href="#petalo" transform="rotate(72) scale(.32)"/>
+      <use href="#petalo" transform="rotate(144) scale(.32)"/>
+      <use href="#petalo" transform="rotate(216) scale(.32)"/>
+      <use href="#petalo" transform="rotate(288) scale(.32)"/>
+    </g>
+    <circle r="3" fill="#e0a83f"/>
+  </g>
+
+  <!-- capullo cerrado -->
+  <g id="capullo">
+    <ellipse rx="11" ry="15" fill="url(#rosado)"/>
+    <path d="M-11 2c2-10 8-16 11-17 3 1 9 7 11 17-4 5-18 5-22 0z" fill="#f6bcbe" opacity=".8"/>
+    <path d="M0 15c-6 0-10-5-10-10 4 4 6 6 10 6s6-2 10-6c0 5-4 10-10 10z" fill="#a9bb92"/>
+  </g>
+
+  <!-- ramita de hojitas -->
+  <g id="ramita">
+    <path d="M0 0C-2-22-4-40-2-58" fill="none" stroke="#a5b78e" stroke-width="2.4" stroke-linecap="round"/>
+    <g fill="url(#oliva)" opacity=".95">
+      <ellipse cx="7"  cy="-12" rx="8" ry="4.5" transform="rotate(-25 7 -12)"/>
+      <ellipse cx="-9" cy="-22" rx="8" ry="4.5" transform="rotate(25 -9 -22)"/>
+      <ellipse cx="6"  cy="-33" rx="7" ry="4"   transform="rotate(-25 6 -33)"/>
+      <ellipse cx="-8" cy="-43" rx="7" ry="4"   transform="rotate(25 -8 -43)"/>
+      <ellipse cx="0"  cy="-56" rx="5" ry="3.5"/>
+    </g>
+  </g>
+
+  <!-- bayas -->
+  <g id="bayas">
+    <path d="M0 0c-1-14-2-24 2-34" fill="none" stroke="#a5b78e" stroke-width="2"/>
+    <g fill="#dc8b84"><circle cx="-6" cy="-30" r="4"/><circle cx="4" cy="-36" r="4.5"/><circle cx="-2" cy="-24" r="3.5"/><circle cx="8" cy="-25" r="3"/></g>
+  </g>
+
+  <!-- ══════ el ramo completo ══════ -->
+  <g id="ramo">
+    <!-- hojas altas que asoman por encima del ramo -->
+    <g opacity=".75">
+      <g fill="url(#salvia)">
+        <use href="#hojaLarga" transform="translate(30 178) rotate(-18)"/>
+        <use href="#hojaLarga" transform="translate(88 186) rotate(14) scale(.85)"/>
+        <use href="#hojaLarga" transform="translate(164 172) rotate(-24) scale(1.15)"/>
+        <use href="#hojaLarga" transform="translate(232 184) rotate(10)"/>
+        <use href="#hojaLarga" transform="translate(306 176) rotate(-14) scale(1.1)"/>
+        <use href="#hojaLarga" transform="translate(374 186) rotate(20) scale(.9)"/>
+        <use href="#hojaLarga" transform="translate(442 174) rotate(-20) scale(1.2)"/>
+        <use href="#hojaLarga" transform="translate(516 184) rotate(12)"/>
+        <use href="#hojaLarga" transform="translate(586 176) rotate(-16) scale(1.05)"/>
+        <use href="#hojaLarga" transform="translate(654 186) rotate(18) scale(.9)"/>
+        <use href="#hojaLarga" transform="translate(724 176) rotate(-14) scale(1.1)"/>
+        <use href="#hojaLarga" transform="translate(-16 176) rotate(-14) scale(1.1)"/>
+      </g>
+    </g>
+
+    <!-- follaje del fondo -->
+    <g opacity=".8">
+      <use href="#ramita" transform="translate(24 200)  rotate(-12) scale(1.7)"/>
+      <use href="#ramita" transform="translate(96 204)  rotate(9)   scale(2)"/>
+      <use href="#ramita" transform="translate(168 200) rotate(-6)  scale(1.6)"/>
+      <use href="#ramita" transform="translate(246 206) rotate(14)  scale(1.9)"/>
+      <use href="#ramita" transform="translate(322 200) rotate(-16) scale(1.75)"/>
+      <use href="#ramita" transform="translate(404 204) rotate(6)   scale(2.1)"/>
+      <use href="#ramita" transform="translate(470 200) rotate(-10) scale(1.6)"/>
+      <use href="#ramita" transform="translate(548 206) rotate(12)  scale(1.95)"/>
+      <use href="#ramita" transform="translate(622 200) rotate(-8)  scale(1.7)"/>
+      <use href="#ramita" transform="translate(700 204) rotate(10)  scale(1.85)"/>
+      <use href="#ramita" transform="translate(-40 204) rotate(10)  scale(1.85)"/>
+      <use href="#bayas"  transform="translate(286 140) rotate(-14) scale(1.2)"/>
+      <use href="#bayas"  transform="translate(452 120) rotate(10)  scale(1.3)"/>
+      <use href="#bayas"  transform="translate(660 136) rotate(-8)  scale(1.2)"/>
+      <use href="#bayas"  transform="translate(120 132) rotate(12)  scale(1.15)"/>
+    </g>
+
+    <!-- hojas grandes -->
+    <g fill="url(#salvia)" opacity=".92">
+      <use href="#hoja" transform="translate(40 168) rotate(-40)"/>
+      <use href="#hoja" transform="translate(72 176) rotate(-140) scale(-1 1)"/>
+      <use href="#hoja" transform="translate(126 160) rotate(-25) scale(1.2)"/>
+      <use href="#hoja" transform="translate(206 150) rotate(-55)"/>
+      <use href="#hoja" transform="translate(238 172) rotate(15) scale(1.1)"/>
+      <use href="#hoja" transform="translate(300 158) rotate(-35) scale(1.15)"/>
+      <use href="#hoja" transform="translate(368 168) rotate(20)"/>
+      <use href="#hoja" transform="translate(418 152) rotate(-45) scale(1.2)"/>
+      <use href="#hoja" transform="translate(486 170) rotate(10)"/>
+      <use href="#hoja" transform="translate(534 156) rotate(-30) scale(1.15)"/>
+      <use href="#hoja" transform="translate(596 172) rotate(25)"/>
+      <use href="#hoja" transform="translate(646 158) rotate(-42) scale(1.1)"/>
+      <use href="#hoja" transform="translate(712 166) rotate(-20) scale(1.2)"/>
+    </g>
+    <g fill="url(#oliva)" opacity=".85">
+      <use href="#hoja" transform="translate(58 186) rotate(-8)"/>
+      <use href="#hoja" transform="translate(180 190) rotate(-165) scale(-1 1)"/>
+      <use href="#hoja" transform="translate(276 186) rotate(-5)"/>
+      <use href="#hoja" transform="translate(396 188) rotate(-170) scale(-1 1)"/>
+      <use href="#hoja" transform="translate(508 186) rotate(-10)"/>
+      <use href="#hoja" transform="translate(628 190) rotate(-168) scale(-1 1)"/>
+      <use href="#hoja" transform="translate(726 184) rotate(-6)"/>
+    </g>
+
+    <!-- capullos y botones -->
+    <use href="#capullo" transform="translate(104 170) rotate(-18)"/>
+    <use href="#capullo" transform="translate(340 178) rotate(12) scale(.9)"/>
+    <use href="#capullo" transform="translate(572 172) rotate(-14)"/>
+    <use href="#boton"   transform="translate(150 178) scale(1.15)"/>
+    <use href="#boton"   transform="translate(262 150) scale(.95)"/>
+    <use href="#boton"   transform="translate(388 182) scale(1.2)"/>
+    <use href="#boton"   transform="translate(444 156) scale(.9)"/>
+    <use href="#boton"   transform="translate(608 184) scale(1.1)"/>
+    <use href="#boton"   transform="translate(688 158) scale(.95)"/>
+
+    <!-- flores principales (la de los extremos se parte en dos para que el mosaico calce) -->
+    <use href="#peonia"  transform="translate(0 182)   scale(.8)  rotate(-8)"/>
+    <use href="#peonia"  transform="translate(740 182) scale(.8)  rotate(-8)"/>
+    <use href="#rosa"    transform="translate(66 174)  scale(.9)  rotate(8)"/>
+    <use href="#anemona" transform="translate(128 190) scale(.6)  rotate(-12)"/>
+    <use href="#peonia"  transform="translate(194 178) scale(.95) rotate(14)"/>
+    <use href="#rosa"    transform="translate(262 192) scale(.7)  rotate(-6)"/>
+    <use href="#peonia"  transform="translate(328 180) scale(.84) rotate(10)"/>
+    <use href="#anemona" transform="translate(396 190) scale(.58) rotate(-10)"/>
+    <use href="#rosa"    transform="translate(454 176) scale(.98) rotate(-10)"/>
+    <use href="#peonia"  transform="translate(524 192) scale(.76) rotate(8)"/>
+    <use href="#rosa"    transform="translate(588 180) scale(.72) rotate(-14)"/>
+    <use href="#peonia"  transform="translate(652 186) scale(.9)  rotate(12)"/>
+    <use href="#rosa"    transform="translate(704 176) scale(.74) rotate(6)"/>
+    <use href="#rosa"    transform="translate(-36 176) scale(.74) rotate(6)"/>
+  </g>
+</defs>
+
+<g filter="url(#halo)" opacity=".45"><use href="#ramo"/></g>
+<g filter="url(#suave)"><use href="#ramo"/></g>
+</svg>

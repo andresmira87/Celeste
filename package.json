@@ -1,0 +1,14 @@
+{
+  "name": "babyshower-celeste",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Invitación web para el Baby Shower de Celeste Mira Rodríguez",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}

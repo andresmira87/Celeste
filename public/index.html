@@ -59,28 +59,29 @@
         </filter>
       </defs>
 
-      <g stroke="#eda9c6" stroke-width="2.2" stroke-linejoin="round" fill="url(#gTela)">
-        <!-- colas largas con punta en V -->
-        <path d="M140 146C118 186 88 224 58 256l22-10 6 24 26-30c18-32 34-62 40-84z"/>
-        <path d="M160 146c22 40 52 78 82 110l-22-10-6 24-26-30c-18-32-34-62-40-84z"/>
-        <!-- lazadas -->
-        <path d="M140 118C120 72 92 42 62 40 24 38 6 78 24 112c16 30 68 42 98 28 12-6 17-12 18-22z"/>
-        <path d="M160 118c20-46 48-76 78-78 38-2 56 38 38 72-16 30-68 42-98 28-12-6-17-12-18-22z"/>
-        <!-- nudo -->
-        <path d="M150 96c-15 4-23 17-22 32 1 15 9 26 22 30 13-4 21-15 22-30 1-15-7-28-22-32z"/>
+      <g stroke="#d9a3ae" stroke-width="2.2" stroke-linejoin="round" fill="url(#gTela)">
+        <!-- lazada izquierda: lóbulo grande y redondeado -->
+        <path d="M138 118C108 66 60 38 30 52 0 66-4 108 28 130c32 22 84 18 110-2 5-4 2-6 0-10z"/>
+        <!-- lazada derecha (espejo) -->
+        <path d="M162 118c30-52 78-80 108-66 30 14 34 56 2 78-32 22-84 18-110-2-5-4-2-6 0-10z"/>
+        <!-- colas anchas con muesca en V -->
+        <path d="M136 148c-18 38-40 70-68 96l18-6 8 18 20-30c14-24 22-52 26-78z"/>
+        <path d="M164 148c18 38 40 70 68 96l-18-6-8 18-20-30c-14-24-22-52-26-78z"/>
+        <!-- nudo central -->
+        <path d="M150 90c-17 4-27 20-26 38 1 18 11 32 26 36 15-4 25-18 26-36 1-18-9-34-26-38z"/>
       </g>
 
       <!-- dobleces y brillos de la tela -->
-      <g fill="none" stroke="#fdeef5" stroke-width="3" stroke-linecap="round" opacity=".9">
-        <path d="M56 60c-18 14-26 36-18 56M80 52c-16 16-22 38-14 56M118 106c-16-18-38-32-60-38"/>
-        <path d="M244 60c18 14 26 36 18 56M220 52c16 16 22 38 14 56M182 106c16-18 38-32 60-38"/>
-        <path d="M134 168c-12 26-30 50-50 72M166 168c12 26 30 50 50 72"/>
-        <path d="M142 104c-4 16-4 34 0 48M158 104c4 16 4 34 0 48" opacity=".7"/>
+      <g fill="none" stroke="#fdeef5" stroke-width="3.4" stroke-linecap="round" opacity=".85">
+        <path d="M46 66c-20 12-30 34-24 56M76 54c-18 16-26 40-18 60M118 104c-18-16-42-28-66-32"/>
+        <path d="M254 66c20 12 30 34 24 56M224 54c18 16 26 40 18 60M182 104c18-16 42-28 66-32"/>
+        <path d="M128 164c-14 28-32 54-54 78M172 164c14 28 32 54 54 78"/>
+        <path d="M140 100c-4 18-4 38 0 54M160 100c4 18 4 38 0 54" opacity=".65"/>
       </g>
 
-      <!-- estrella central facetada -->
-      <g transform="translate(150 124)">
-        <circle r="40" fill="#f8e3ac" opacity=".55" filter="url(#brilloEstrella)"/>
+      <!-- estrella dorada central, grande -->
+      <g transform="translate(150 122) scale(1.14)">
+        <circle r="42" fill="#f8e3ac" opacity=".55" filter="url(#brilloEstrella)"/>
         <path d="M0-46 11.2-15.4 43.7-14.2 18.1 5.9 27 36.4 0 19-27 36.4-18.1 5.9-43.7-14.2-11.2-15.4z"
               fill="url(#gEstrella)" stroke="#c69a3c" stroke-width="1.8" stroke-linejoin="round"/>
         <g fill="#fdf3d4" opacity=".6">
@@ -90,28 +91,30 @@
           <path d="M0 0 0-46-11.2-15.4z"/><path d="M0 0 43.7-14.2 11.2-15.4z"/><path d="M0 0 27 36.4 18.1 5.9z"/>
           <path d="M0 0-43.7-14.2-18.1 5.9z"/>
         </g>
-        <circle cx="-6" cy="-20" r="4" fill="#fffdf4" opacity=".85"/>
+        <circle cx="-6" cy="-20" r="4.4" fill="#fffdf4" opacity=".85"/>
       </g>
 
-      <!-- estrellitas y purpurina -->
+      <!-- estrellitas y purpurina dorada, bien repartidas -->
       <g fill="#e2b95e">
-        <path d="M64 78l4.4 9 9.6 1.4-7 6.8 1.7 9.6L64 100l-8.7 4.6 1.7-9.6-7-6.8 9.6-1.4z" opacity=".9"/>
-        <path d="M228 90l3.6 7.4 8 1.2-5.8 5.6 1.4 8-7.2-3.8-7.2 3.8 1.4-8-5.8-5.6 8-1.2z" opacity=".85"/>
-        <path d="M104 200l3.2 6.6 7.2 1-5.2 5 1.2 7.2-6.4-3.4-6.4 3.4 1.2-7.2-5.2-5 7.2-1z" opacity=".8"/>
-        <path d="M196 214l2.8 5.8 6.4.9-4.6 4.4 1 6.4-5.6-3-5.6 3 1-6.4-4.6-4.4 6.4-.9z" opacity=".8"/>
-        <path d="M40 116l2.4 5 5.4.8-3.9 3.7.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.7 5.4-.8z" opacity=".7"/>
-        <path d="M258 124l2.4 5 5.4.8-3.9 3.7.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.7 5.4-.8z" opacity=".7"/>
-        <path d="M146 236l2.6 5.4 6 .9-4.3 4.1 1 6-5.3-2.8-5.3 2.8 1-6-4.3-4.1 6-.9z" opacity=".75"/>
+        <path d="M60 74l4.4 9 9.6 1.4-7 6.8 1.7 9.6L60 96l-8.7 4.6 1.7-9.6-7-6.8 9.6-1.4z" opacity=".92"/>
+        <path d="M98 46l3.6 7.4 8 1.2-5.8 5.6 1.4 8-7.2-3.8-7.2 3.8 1.4-8-5.8-5.6 8-1.2z" opacity=".85"/>
+        <path d="M232 86l4 8.2 8.8 1.3-6.4 6.2 1.5 8.8-8-4.2-8 4.2 1.5-8.8-6.4-6.2 8.8-1.3z" opacity=".9"/>
+        <path d="M200 44l3.2 6.6 7.2 1-5.2 5 1.2 7.2-6.4-3.4-6.4 3.4 1.2-7.2-5.2-5 7.2-1z" opacity=".8"/>
+        <path d="M96 192l3.4 7 7.6 1.1-5.5 5.3 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.3 7.6-1.1z" opacity=".85"/>
+        <path d="M204 192l3 6.2 6.8 1-4.9 4.7 1.2 6.8-6.1-3.2-6.1 3.2 1.2-6.8-4.9-4.7 6.8-1z" opacity=".8"/>
+        <path d="M40 162l2.6 5.4 6 .9-4.3 4.1 1 6-5.3-2.8-5.3 2.8 1-6-4.3-4.1 6-.9z" opacity=".7"/>
+        <path d="M258 162l2.6 5.4 6 .9-4.3 4.1 1 6-5.3-2.8-5.3 2.8 1-6-4.3-4.1 6-.9z" opacity=".7"/>
+        <path d="M148 216l2.4 5 5.4.8-3.9 3.7.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.7 5.4-.8z" opacity=".75"/>
       </g>
       <g fill="#e9c98a">
-        <circle cx="92" cy="66" r="3"/><circle cx="120" cy="88" r="2.4"/><circle cx="200" cy="72" r="3"/>
-        <circle cx="176" cy="92" r="2.4"/><circle cx="56" cy="140" r="2.6"/><circle cx="244" cy="146" r="2.6"/>
-        <circle cx="120" cy="228" r="2.6"/><circle cx="180" cy="242" r="2.6"/><circle cx="150" cy="196" r="2.2"/>
-        <circle cx="84" cy="182" r="2.2"/><circle cx="216" cy="188" r="2.2"/><circle cx="150" cy="70" r="2.4"/>
+        <circle cx="82" cy="100" r="3"/><circle cx="116" cy="70" r="2.4"/><circle cx="210" cy="102" r="3"/>
+        <circle cx="176" cy="70" r="2.4"/><circle cx="52" cy="108" r="2.6"/><circle cx="248" cy="110" r="2.6"/>
+        <circle cx="112" cy="182" r="2.6"/><circle cx="188" cy="182" r="2.6"/><circle cx="150" cy="176" r="2.2"/>
+        <circle cx="86" cy="146" r="2.2"/><circle cx="214" cy="146" r="2.2"/><circle cx="150" cy="60" r="2.4"/>
       </g>
-      <g fill="#fff" opacity=".75">
-        <circle cx="78" cy="88" r="3.4"/><circle cx="214" cy="96" r="3"/><circle cx="112" cy="66" r="2.4"/>
-        <circle cx="188" cy="66" r="2.4"/><circle cx="128" cy="204" r="2.6"/><circle cx="170" cy="212" r="2.6"/>
+      <g fill="#fff" opacity=".7">
+        <circle cx="70" cy="88" r="3.4"/><circle cx="222" cy="90" r="3"/><circle cx="130" cy="52" r="2.4"/>
+        <circle cx="170" cy="52" r="2.4"/><circle cx="118" cy="200" r="2.6"/><circle cx="182" cy="200" r="2.6"/>
       </g>
     </symbol>
 
@@ -213,6 +216,23 @@
         <circle cx="70" cy="188" r="3.4"/><circle cx="34" cy="166" r="3.4"/><circle cx="66" cy="132" r="3.4"/><circle cx="28" cy="92" r="3.4"/>
       </g>
     </symbol>
+
+    <!-- Sello de cera para la carta de entrada -->
+    <symbol id="svgSello" viewBox="0 0 120 120">
+      <radialGradient id="gCera" cx="35%" cy="28%" r="78%">
+        <stop offset="0%" stop-color="#e9a99d"/>
+        <stop offset="55%" stop-color="#c1766a"/>
+        <stop offset="100%" stop-color="#93564c"/>
+      </radialGradient>
+      <g fill="url(#gCera)">
+        <circle cx="24" cy="98" r="8"/><circle cx="92" cy="100" r="6.5"/><circle cx="60" cy="109" r="5.5"/>
+        <circle cx="60" cy="58" r="50"/>
+      </g>
+      <circle cx="60" cy="58" r="50" fill="none" stroke="#7a4038" stroke-width="1.2" opacity=".3"/>
+      <circle cx="60" cy="58" r="41" fill="none" stroke="#f6d9d1" stroke-width="1.4" opacity=".55"/>
+      <text x="60" y="75" text-anchor="middle" font-family="'Great Vibes','Dancing Script',cursive" font-size="50" fill="#fdece6">C</text>
+      <ellipse cx="36" cy="32" rx="10" ry="7" fill="#f2d1c8" opacity=".45" transform="rotate(-30 36 32)"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -222,6 +242,23 @@
   <span class="mancha m1"></span><span class="mancha m2"></span><span class="mancha m3"></span>
   <svg class="rama rama-izq"><use href="#svgRama"/></svg>
   <svg class="rama rama-der"><use href="#svgRama"/></svg>
+</div>
+
+<!-- ══════════ Carta de entrada: se abre tocando el sello ══════════ -->
+<div class="carta" id="carta">
+  <p class="carta-titulo">Tienes una carta</p>
+  <p class="carta-nombre">para ti</p>
+
+  <div class="sobre">
+    <div class="cuerpo-sobre"></div>
+    <div class="solapa" id="solapa"></div>
+    <button type="button" class="sello" id="btnSello" aria-label="Abrir la invitación">
+      <svg viewBox="0 0 120 120" aria-hidden="true"><use href="#svgSello"/></svg>
+    </button>
+    <svg class="coneja-sello" id="conejaSello" viewBox="0 0 240 320" aria-hidden="true"><use href="#svgConeja"/></svg>
+  </div>
+
+  <p class="carta-sub" id="cartaSub">Toca el sello para abrirla</p>
 </div>
 
 <main>
@@ -332,7 +369,8 @@
   <section class="pantalla regalos" id="regalos">
     <h2 class="titulo-seccion revelar">Lista de regalos</h2>
     <p class="texto-rosa revelar">
-      Esto es lo que Celeste necesita.<br>Escoge lo que quieras llevarle y pon tu nombre.
+      Esto es lo que Celeste necesita.<br>Escoge lo que quieras llevarle y pon tu nombre.<br>
+      También habrá lluvia de sobres 💌
     </p>
 
     <div class="pestanas revelar" id="pestanasRegalos"></div>
@@ -445,6 +483,7 @@
   </div>
 </template>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

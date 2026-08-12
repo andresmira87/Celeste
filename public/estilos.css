@@ -62,6 +62,106 @@ body {
 /* ── brillos del cursor ── */
 #brillos { position: fixed; inset: 0; z-index: 9998; pointer-events: none; }
 
+/* ═══════════ carta de entrada ═══════════ */
+.carta {
+  position: fixed; inset: 0;
+  z-index: 10050;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 18px;
+  padding: 24px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #fffaf5 0%, transparent 55%),
+    linear-gradient(160deg, #fdf3ea 0%, #f7e3d8 55%, #f3d9d2 100%);
+  /* la transición de apertura la controla GSAP; esta clase solo es el respaldo sin JS/GSAP */
+}
+.carta.oculta { opacity: 0; pointer-events: none; }
+.carta[hidden] { display: none; }
+
+.carta-titulo {
+  margin: 0;
+  font-family: var(--script);
+  font-weight: 700;
+  font-size: clamp(2rem, 8.5vw, 2.7rem);
+  color: var(--terracota);
+  text-align: center;
+}
+.carta-nombre {
+  margin: -14px 0 0;
+  font-family: var(--script-fina);
+  font-size: clamp(1.2rem, 5.5vw, 1.6rem);
+  color: var(--terracota-cl);
+  text-align: center;
+}
+.carta-sub {
+  margin: 0;
+  font-size: .74rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tinta);
+  opacity: .7;
+  text-align: center;
+  animation: invita 1.8s ease-in-out infinite;
+}
+@keyframes invita { 0%, 100% { opacity: .55; } 50% { opacity: .95; } }
+
+.sobre {
+  position: relative;
+  width: min(92%, 460px);
+  aspect-ratio: 4 / 3;
+  perspective: 1400px;
+  flex-shrink: 0;
+}
+.cuerpo-sobre {
+  position: absolute; inset: 0;
+  z-index: 1;
+  border: 1px solid #e9c9bc;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #fffdfb, #fdf1e8);
+  box-shadow: 0 20px 44px rgba(150, 95, 80, .18);
+}
+.solapa {
+  position: absolute; top: 0; left: 0; right: 0; height: 58%;
+  z-index: 2;
+  background: linear-gradient(160deg, #fdf6ef, #f3ddd2);
+  border: 1px solid #e9c9bc;
+  clip-path: polygon(0 0, 100% 0, 50% 92%);
+  transform-origin: 50% 0%;
+  box-shadow: 0 10px 18px rgba(150, 95, 80, .1);
+  /* la abre GSAP (rotationX) al tocar el sello */
+}
+
+.sello {
+  position: absolute; top: 58%; left: 50%;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  width: clamp(66px, 18vw, 96px);
+  border: none; background: none; padding: 0; cursor: pointer;
+  filter: drop-shadow(0 10px 16px rgba(120, 70, 60, .35));
+  animation: respiraSello 2.4s ease-in-out infinite;
+  transition: transform .15s ease;
+}
+.sello svg { display: block; width: 100%; height: auto; }
+.sello:hover { transform: translate(-50%, -50%) scale(1.05); }
+@keyframes respiraSello { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.045); } }
+/* el golpe, la apertura y el desvanecido los controla GSAP (ver app.js) */
+
+.coneja-sello {
+  position: absolute; left: 50%; top: 58%;
+  z-index: 4;
+  width: clamp(70px, 19vw, 120px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 14px rgba(180, 130, 125, .3));
+}
+
+.particula-sello { position: fixed; z-index: 10060; pointer-events: none; will-change: transform, opacity; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sello { animation: none; }
+  .carta-sub { animation: none; }
+}
+
 /* ═══════════ estructura ═══════════ */
 main {
   position: relative;

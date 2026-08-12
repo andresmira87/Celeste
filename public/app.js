@@ -8,6 +8,133 @@
   const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
   const menosMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ───────── 0 · Carta de entrada: se abre tocando el sello (GSAP) ───────── */
+  (function carta() {
+    const cartaEl = $('#carta');
+    const btn = $('#btnSello');
+    const solapa = $('#solapa');
+    const sobre = $('.sobre');
+    const coneja = $('#conejaSello');
+    const textos = $$('.carta-titulo, .carta-nombre, .carta-sub', cartaEl);
+    if (!cartaEl || !btn) return;
+
+    const tieneGSAP = typeof gsap !== 'undefined';
+    document.body.style.overflow = 'hidden';
+
+    // cartas, flores, estrellas y corazones: un estallido bien tupido
+    function lanzarParticulas(x, y) {
+      const emojis = [
+        '💗', '💗', '💌', '💌', '⭐', '⭐', '✨', '✨',
+        '🌸', '🌸', '🌹', '🌷', '💛', '✉️', '🦋'
+      ];
+      const cantidad = 170;
+      for (let i = 0; i < cantidad; i++) {
+        const s = document.createElement('span');
+        s.className = 'particula-sello';
+        s.textContent = emojis[(Math.random() * emojis.length) | 0];
+        s.style.left = x + 'px';
+        s.style.top = y + 'px';
+        s.style.fontSize = (14 + Math.random() * 19) + 'px';
+        document.body.appendChild(s);
+
+        const ang = Math.random() * Math.PI * 2;
+        const dist = 90 + Math.random() * 320;
+        gsap.set(s, { xPercent: -50, yPercent: -50, scale: .25, opacity: 0 });
+        gsap.to(s, {
+          x: Math.cos(ang) * dist,
+          y: Math.sin(ang) * dist - 90,           // sesgo hacia arriba
+          scale: gsap.utils.random(.6, 1.25),
+          rotate: gsap.utils.random(-360, 360),
+          opacity: 0,
+          duration: gsap.utils.random(1.1, 2.1),
+          delay: gsap.utils.random(0, .28),
+          ease: 'sine.out',
+          onComplete: () => s.remove()
+        });
+        gsap.to(s, { opacity: 1, duration: .3, delay: gsap.utils.random(0, .28), ease: 'sine.out' });
+      }
+    }
+
+    // sobres cayendo como lluvia desde arriba, con un vaivén suave
+    function lluviaSobres() {
+      const sobresEmoji = ['💌', '✉️', '💌'];
+      const cantidad = 116;
+      for (let i = 0; i < cantidad; i++) {
+        const s = document.createElement('span');
+        s.className = 'particula-sello';
+        s.textContent = sobresEmoji[(Math.random() * sobresEmoji.length) | 0];
+        s.style.left = (Math.random() * innerWidth) + 'px';
+        s.style.top = '-40px';
+        s.style.fontSize = (17 + Math.random() * 15) + 'px';
+        document.body.appendChild(s);
+
+        const deriva = gsap.utils.random(-70, 70);
+        const giro = gsap.utils.random(-30, 30);
+        gsap.set(s, { xPercent: -50, yPercent: -50, opacity: 0, rotate: -giro });
+        gsap.timeline({ delay: gsap.utils.random(0, 1.1), onComplete: () => s.remove() })
+          .to(s, { opacity: 1, duration: .35, ease: 'sine.out' }, 0)
+          .to(s, { y: innerHeight + 80, ease: 'sine.in', duration: gsap.utils.random(2.1, 3.2) }, 0)
+          .to(s, { x: deriva, rotate: giro, duration: gsap.utils.random(1.4, 2), ease: 'sine.inOut', yoyo: true, repeat: 1 }, 0)
+          .to(s, { opacity: 0, duration: .4, ease: 'sine.in' }, '-=0.5');
+      }
+    }
+
+    function brincarConeja() {
+      if (!coneja) return;
+      gsap.set(coneja, { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: .35, rotate: 0, opacity: 0 });
+      gsap.timeline()
+        .to(coneja, { opacity: 1, duration: .12, ease: 'sine.out' }, 0)
+        .to(coneja, { x: -70, y: -50, scale: .5, rotate: -8, duration: .3, ease: 'sine.out' }, 0)
+        .to(coneja, { x: -35, y: 15, scale: .46, rotate: 6, duration: .24, ease: 'sine.inOut' })
+        .to(coneja, { x: 5, y: -70, scale: .56, rotate: -6, duration: .3, ease: 'sine.out' })
+        .to(coneja, { x: 45, y: 15, scale: .46, rotate: 5, duration: .24, ease: 'sine.inOut' })
+        .to(coneja, { x: 90, y: -95, scale: .4, rotate: -4, opacity: 0, duration: .32, ease: 'sine.in' });
+    }
+
+    function abrir() {
+      btn.disabled = true;
+
+      // sin GSAP o con "reducir movimiento": recorte directo, sin adornos
+      if (!tieneGSAP || menosMovimiento) {
+        cartaEl.style.transition = 'opacity .5s ease';
+        cartaEl.classList.add('oculta');
+        document.body.style.overflow = '';
+        setTimeout(() => { cartaEl.hidden = true; }, menosMovimiento ? 80 : 520);
+        return;
+      }
+
+      const r = btn.getBoundingClientRect();
+      lanzarParticulas(r.left + r.width / 2, r.top + r.height / 2);
+      lluviaSobres();
+      brincarConeja();
+
+      btn.style.animation = 'none';
+      gsap.set(btn, { xPercent: -50, yPercent: -50 });
+
+      gsap.timeline({
+        defaults: { ease: 'sine.inOut' },
+        onComplete: () => {
+          cartaEl.hidden = true;
+          document.body.style.overflow = '';
+        }
+      })
+        // el sello se comprime, rebota hacia afuera y sale volando
+        .to(btn, { scale: .82, duration: .11, ease: 'power2.out' })
+        .to(btn, { scale: 1.22, rotation: 10, duration: .17, ease: 'back.out(2.4)' })
+        .to(btn, { scale: 0, rotation: 45, opacity: 0, duration: .32, ease: 'power3.in' }, '-=0.02')
+        // la solapa se despliega mientras el sello todavía está saliendo
+        .to(solapa, { rotationX: -168, opacity: 0, duration: .9, ease: 'power2.inOut' }, '-=0.3')
+        // los textos se elevan y se disuelven un poco antes que el sobre
+        .to(textos, { opacity: 0, y: -14, duration: .5, stagger: .05 }, '-=0.7')
+        // el sobre entero flota hacia arriba y se desvanece
+        .to(sobre, { y: -30, scale: 1.05, opacity: 0, duration: .75 }, '-=0.65')
+        // el fondo termina de aclararse, dejando ver la portada
+        .to(cartaEl, { opacity: 0, duration: .6 }, '-=0.55');
+    }
+
+    btn.addEventListener('click', abrir, { once: true });
+  })();
+
   /* ───────── 1 · Brillos que siguen el cursor ───────── */
   (function brillos() {
     const canvas = $('#brillos');
@@ -121,6 +248,21 @@
     $('img', fig).src = foto.src;
     fig.hidden = false;
     $('#respaldoPortada').hidden = true;
+  })();
+
+  // Moño real: si copiaste tu propio lazo a public/img/lazo.png, remplaza el dibujado
+  // en TODOS los lugares donde aparece (portada, textos, modales, carta).
+  (async () => {
+    const propio = await buscarImagen(ext('lazo'));
+    if (!propio) return;                   // sin imagen se queda el lazo dibujado
+    $$('.lazo').forEach((svg) => {
+      const img = document.createElement('img');
+      img.src = propio.src;
+      img.className = svg.getAttribute('class') || '';
+      if (svg.hasAttribute('aria-hidden')) img.setAttribute('aria-hidden', 'true');
+      else img.alt = svg.getAttribute('aria-label') || 'Lazo rosa con estrellas';
+      svg.replaceWith(img);
+    });
   })();
 
   /* ───────── 3 · Jardín que se mece con el cursor y el scroll ───────── */

@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import {
-  guardarConfirmacion, listarConfirmaciones, resumen,
+  listo, guardarConfirmacion, listarConfirmaciones, resumen,
   listarRegalos, reservarArticulo, liberarRegalo
 } from './db.js';
 
@@ -110,8 +110,8 @@ const servidor = http.createServer(async (req, res) => {
         return json(res, 400, { ok: false, error: 'Agrega al menos una persona que asistirá.' });
       }
 
-      const guardado = guardarConfirmacion({ nombre, telefono, asistira, mensaje, invitados });
-      return json(res, 200, { ok: true, ...guardado, resumen: resumen() });
+      const guardado = await guardarConfirmacion({ nombre, telefono, asistira, mensaje, invitados });
+      return json(res, 200, { ok: true, ...guardado, resumen: await resumen() });
     } catch (err) {
       console.error('Error al guardar:', err);
       return json(res, 500, { ok: false, error: 'No pudimos guardar tu confirmación. Intenta de nuevo.' });
@@ -119,12 +119,12 @@ const servidor = http.createServer(async (req, res) => {
   }
 
   if (url.pathname === '/api/resumen' && req.method === 'GET') {
-    return json(res, 200, { ok: true, ...resumen() });
+    return json(res, 200, { ok: true, ...(await resumen()) });
   }
 
   // ---------- lista de regalos ----------
   if (url.pathname === '/api/lista' && req.method === 'GET') {
-    return json(res, 200, { ok: true, grupos: listarRegalos(), resumen: resumen() });
+    return json(res, 200, { ok: true, grupos: await listarRegalos(), resumen: await resumen() });
   }
 
   if (url.pathname === '/api/reservar' && req.method === 'POST') {
@@ -137,9 +137,9 @@ const servidor = http.createServer(async (req, res) => {
       if (!nombre) return json(res, 400, { ok: false, error: 'Escribe tu nombre para apartarlo.' });
       if (!Number.isInteger(articuloId)) return json(res, 400, { ok: false, error: 'Regalo inválido.' });
 
-      const r = reservarArticulo({ articuloId, nombre, telefono });
-      if (!r.ok) return json(res, r.ocupado ? 409 : 400, r);
-      return json(res, 200, { ...r, grupos: listarRegalos() });
+      const r = await reservarArticulo({ articuloId, nombre, telefono });
+      if (!r.ok) return json(res, r.ocupado ? 409 : 400, { ...r, grupos: await listarRegalos() });
+      return json(res, 200, { ...r, grupos: await listarRegalos() });
     } catch (err) {
       console.error('Error al reservar:', err);
       return json(res, 500, { ok: false, error: 'No pudimos apartar el regalo. Intenta de nuevo.' });
@@ -152,12 +152,12 @@ const servidor = http.createServer(async (req, res) => {
       const datos = JSON.parse((await leerCuerpo(req)) || '{}');
       if (datos.clave !== CLAVE_ADMIN) return json(res, 401, { ok: false, error: 'Clave incorrecta' });
 
-      const r = liberarRegalo({
+      const r = await liberarRegalo({
         reservaId: datos.reservaId ? Number(datos.reservaId) : null,
         articuloId: datos.articuloId ? Number(datos.articuloId) : null
       });
       if (!r.ok) return json(res, 400, r);
-      return json(res, 200, { ...r, grupos: listarRegalos(), resumen: resumen() });
+      return json(res, 200, { ...r, grupos: await listarRegalos(), resumen: await resumen() });
     } catch (err) {
       console.error('Error al liberar:', err);
       return json(res, 500, { ok: false, error: 'No pudimos liberar el regalo.' });
@@ -170,9 +170,9 @@ const servidor = http.createServer(async (req, res) => {
     }
     return json(res, 200, {
       ok: true,
-      resumen: resumen(),
-      lista: listarConfirmaciones(),
-      grupos: listarRegalos()
+      resumen: await resumen(),
+      lista: await listarConfirmaciones(),
+      grupos: await listarRegalos()
     });
   }
 
@@ -183,7 +183,7 @@ const servidor = http.createServer(async (req, res) => {
     }
     const esc = (t) => `"${String(t ?? '').replace(/"/g, '""')}"`;
     const filas = [['id', 'confirma', 'telefono', 'asiste', 'personas', 'invitados', 'mensaje', 'fecha']];
-    for (const c of listarConfirmaciones()) {
+    for (const c of await listarConfirmaciones()) {
       filas.push([
         c.id, c.nombre, c.telefono, c.asistira ? 'SI' : 'NO', c.invitados.length,
         c.invitados.map((i) => `${i.nombre}${i.tipo === 'nino' ? ' (niño)' : ''}`).join(' / '),
@@ -204,16 +204,27 @@ const servidor = http.createServer(async (req, res) => {
   res.writeHead(405).end('Método no permitido');
 });
 
-servidor.listen(PORT, '0.0.0.0', () => {
-  const ips = Object.values(os.networkInterfaces())
-    .flat()
-    .filter((i) => i && i.family === 'IPv4' && !i.internal)
-    .map((i) => i.address);
+// espera a que la base de datos (tablas + catálogo de regalos) esté lista
+listo
+  .then(() => {
+    servidor.listen(PORT, '0.0.0.0', () => {
+      // en Vercel no hay red local que anunciar
+      if (process.env.VERCEL) { console.log('Baby Shower · servidor listo (Vercel)'); return; }
 
-  console.log('\n  💗  Baby Shower de Celeste Mira — servidor encendido\n');
-  console.log(`  En este PC:        http://localhost:${PORT}`);
-  for (const ip of ips) console.log(`  Desde el celular:  http://${ip}:${PORT}   (misma red WiFi)`);
-  console.log(`\n  Lista de confirmados:  http://localhost:${PORT}/admin.html   (clave: ${CLAVE_ADMIN})`);
-  console.log('  Base de datos:         babyshower.db\n');
-  console.log('  Para apagar el servidor: Ctrl + C\n');
-});
+      const ips = Object.values(os.networkInterfaces())
+        .flat()
+        .filter((i) => i && i.family === 'IPv4' && !i.internal)
+        .map((i) => i.address);
+
+      console.log('\n  💗  Baby Shower de Celeste Mira — servidor encendido\n');
+      console.log(`  En este PC:        http://localhost:${PORT}`);
+      for (const ip of ips) console.log(`  Desde el celular:  http://${ip}:${PORT}   (misma red WiFi)`);
+      console.log(`\n  Lista de confirmados:  http://localhost:${PORT}/admin.html   (clave: ${CLAVE_ADMIN})`);
+      console.log('  Base de datos:         Turso (en la nube)\n');
+      console.log('  Para apagar el servidor: Ctrl + C\n');
+    });
+  })
+  .catch((err) => {
+    console.error('No se pudo preparar la base de datos:', err);
+    process.exit(1);
+  });

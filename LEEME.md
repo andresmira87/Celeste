@@ -4,7 +4,9 @@ Invitación web con confirmación de asistencia guardada en base de datos.
 
 ## Cómo encenderla
 
-Doble clic en **`INICIAR.bat`** (o en una terminal: `node server.js`).
+Doble clic en **`INICIAR.bat`** (o en una terminal: `npm run dev`).
+
+> La primera vez, instala las dependencias con `npm install` (solo una vez).
 
 Verás algo así:
 
@@ -49,11 +51,9 @@ El panel tiene dos pestañas:
 Arriba se ven los totales: personas, adultos, niños, familias, regalos apartados
 y cuántos siguen libres.
 
-Para cambiar la clave, enciende así:
-
-```
-set CLAVE_ADMIN=miclave && node server.js
-```
+Para cambiar la clave, edítala en el archivo **`.env`** (línea `CLAVE_ADMIN=...`)
+y reinicia el servidor. En Vercel, cámbiala en las variables de entorno del
+proyecto (ver más abajo).
 
 ## ⚠️ Poner tus dos imágenes (importante)
 
@@ -74,11 +74,22 @@ con estos nombres exactos:
 
 ## Base de datos
 
-No hubo que instalar nada: **Node 24 trae SQLite incluido** (`node:sqlite`),
-así que el proyecto tiene **cero dependencias**.
+La base de datos vive en **Turso** (SQLite en la nube, gratis para este uso) y
+no en un archivo local. Se hizo así porque el sitio quedó publicado en
+**Vercel**, y Vercel no permite guardar archivos de forma permanente — cada
+visita puede atender un servidor distinto y desechable, así que un archivo
+`.db` local se perdería. Con Turso, tanto tu PC como el sitio en internet leen
+y escriben **la misma base**, en tiempo real.
 
-Los datos quedan en el archivo **`babyshower.db`** (junto a `server.js`).
-Ese archivo es la copia de seguridad: guárdalo y no lo borres.
+Las credenciales de conexión están en el archivo **`.env`** (no se sube a
+GitHub, está en `.gitignore`). Ahí también vive el ejemplo sin datos:
+`.env.example`.
+
+```
+TURSO_DATABASE_URL=libsql://babyshower-celeste-andresmira87.aws-us-east-1.turso.io
+TURSO_AUTH_TOKEN=········  (token largo, no lo compartas)
+CLAVE_ADMIN=celeste2026
+```
 
 Tablas:
 
@@ -92,6 +103,13 @@ Tablas:
 Los artículos de una sola persona tienen un candado en la base
 (`uniq_reserva_exclusiva`), así que **es imposible que dos personas aparten lo
 mismo**, aunque le den clic al mismo tiempo desde dos celulares.
+
+### Ver o administrar la base directamente (opcional)
+
+Panel web de Turso: **https://app.turso.tech/andresmira87** → base
+`babyshower-celeste`. Ahí puedes ver las tablas, correr consultas SQL a mano o
+crear un respaldo. También existe la CLI (`turso db shell babyshower-celeste`)
+si prefieres la terminal.
 
 ## Qué incluye la página
 
@@ -114,30 +132,55 @@ mismo**, aunque le den clic al mismo tiempo desde dos celulares.
 - Si envías el enlace terminado en **`/#formulario`**, la página abre directo en
   el formulario de confirmación.
 
-## Ponerla en internet (opcional)
+## El sitio ya está en internet
 
-Como es Node puro, sirve cualquier hosting de Node (Render, Railway, Fly.io) o
-un túnel rápido desde este PC:
+Está conectado a GitHub (**github.com/andresmira87/Celeste**) y cada vez que
+subes un cambio a la rama `main`, **Vercel lo publica solo** en un par de
+minutos. Ese es el enlace que le mandas a la familia — no `localhost`.
+
+### Dejar la base de datos funcionando en Vercel (hazlo una sola vez)
+
+El código ya está listo, pero Vercel no conoce todavía las credenciales de
+Turso (viven en tu `.env`, que nunca se sube a GitHub por seguridad). Sin este
+paso, el sitio publicado no podrá guardar confirmaciones ni regalos:
+
+1. Entra a tu proyecto en **vercel.com** → pestaña **Settings → Environment
+   Variables**.
+2. Agrega estas tres, copiando los valores desde tu archivo `.env`:
+   - `TURSO_DATABASE_URL`
+   - `TURSO_AUTH_TOKEN`
+   - `CLAVE_ADMIN`
+3. Guarda y vuelve a desplegar (**Deployments → ⋯ → Redeploy**), o simplemente
+   sube cualquier cambio nuevo a GitHub — con eso ya recoge las variables.
+
+Después de eso, el panel de administración en internet
+(`https://tu-sitio.vercel.app/admin.html`) muestra exactamente lo mismo que ves
+en tu PC, porque los dos leen la misma base en Turso.
+
+### Subir cambios
 
 ```
-npx localtunnel --port 3000
+git add -A
+git commit -m "lo que cambiaste"
+git push
 ```
 
-Eso te da un enlace público temporal para enviar por WhatsApp.
+Vercel detecta el `push` y publica solo.
 
 ## Archivos
 
 ```
 server.js        servidor web + API
-db.js            base de datos SQLite
-babyshower.db    los datos (se crea solo al iniciar)
+db.js            conexión a Turso + todas las consultas
+.env             credenciales de Turso (NO se sube a GitHub)
+.env.example     mismo archivo, sin datos, como referencia
 datos/
   articulos.json la lista de regalos sacada del Excel
 public/
   index.html       la invitación
   estilos.css      diseño y colores
-  app.js           brillos del cursor, jardín animado, cuenta regresiva, formulario
-  admin.html       lista de confirmados
+  app.js           brillos del cursor, jardín animado, cuenta regresiva, formulario, regalos
+  admin.html       panel: confirmaciones + lista de regalos
   img/
     celeste.png    ← TU imagen de la conejita (ponla aquí)
     flores.png     ← TU borde de flores en PNG transparente (ponla aquí)

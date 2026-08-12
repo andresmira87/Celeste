@@ -1,0 +1,8 @@
+node_modules/
+.env
+.env.*
+!.env.example
+babyshower.db
+babyshower.db-shm
+babyshower.db-wal
+*.log
